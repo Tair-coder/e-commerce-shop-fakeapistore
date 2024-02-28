@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "../UI/Modal";
+import Modal from "./Modal";
 import Products from "./Products";
 import Navbar from "../Navbar/Navbar";
 import styles from "./Home.module.css";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-
+import styles from "./SignupForm.module.css";
 function SignupForm(props) {
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [error, setError] = useState(false);
@@ -18,6 +18,7 @@ function SignupForm(props) {
       .then(async () => {
         console.log("successfuly signup");
         await props.sendEmailVerification(props.auth.currentUser);
+
         alert("Please confirm your email adress by click on link in your mail");
         props.setNewUserHandler();
       })
@@ -31,14 +32,30 @@ function SignupForm(props) {
     <form onSubmit={(e) => onSubmitHandler(e)}>
       <span>
         <label htmlFor="email">Enter email</label>
-        <input id="email" name="email" type="text" ref={emailRef} />
+        <input
+          id="email"
+          name="email"
+          type="text"
+          ref={emailRef}
+          className={styles.signup__input}
+        />
       </span>
 
       <span>
         <label htmlFor="password">Enter password</label>
-        <input id="password" name="password" type="text" ref={passwordRef} />
+        <input
+          id="password"
+          name="password"
+          type="text"
+          ref={passwordRef}
+          className={styles.signup__input}
+        />
       </span>
-      <button type="submit" disabled={btnDisabled}>
+      <button
+        type="submit"
+        disabled={btnDisabled}
+        className={styles.signup__btn}
+      >
         Submit
       </button>
       {error && <p className="error_text">Invalid email or password</p>}

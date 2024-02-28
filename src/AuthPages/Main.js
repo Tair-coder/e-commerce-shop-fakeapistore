@@ -10,12 +10,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import CardForm from "../UI/CardForm";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { useDispatch } from "react-redux";
+import { fetchSlideAction } from "../store/fetch-slice";
 const firebaseConfig = {
   apiKey: "AIzaSyBq_xS6WmxxuapIy_qWK0918j6tlfUtO90",
   authDomain: "e-commerce-shop-d6bd3.firebaseapp.com",
@@ -29,20 +25,27 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+
 function Main(props) {
+  const dispatchFunction = useDispatch();
   const [newUser, setNewUser] = useState(false);
   const setNewUserHandler = () => {
     setNewUser(!newUser);
   };
   const setUserHandler = () => {
-    props.setUser(auth.currentUser.uid);
+    //this functions calls when user log in then  that you can get user uid
+    dispatchFunction(
+      fetchSlideAction.getUserUid({ uid: auth.currentUser.uid })
+    );
   };
   return (
     <div className={styles.main}>
       <h1>Welcome back!</h1>
       {newUser ? (
         <CardForm>
-          <button onClick={setNewUserHandler}>Back</button>
+          <button onClick={setNewUserHandler} className={styles.main__backBtn}>
+            Back
+          </button>
           <SignupForm
             auth={auth}
             sendEmailVerification={sendEmailVerification}
@@ -57,7 +60,10 @@ function Main(props) {
             signInWithEmailAndPassword={signInWithEmailAndPassword}
             user={setUserHandler}
           />
-          <button onClick={setNewUserHandler}>
+          <button
+            onClick={setNewUserHandler}
+            className={styles.main__signupBtn}
+          >
             Haven't account yet? Create
           </button>
         </CardForm>

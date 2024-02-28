@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
+import styles from "./LoginForm.module.css";
 function LoginForm(props) {
   // local storage has a data of user
   useEffect(() => {
@@ -59,13 +60,29 @@ function LoginForm(props) {
     <form onSubmit={(e) => onSubmitHandler(e)}>
       <span>
         <label htmlFor="email">Enter email</label>
-        <input id="email" name="email" type="text" ref={emailRef} />
+        <input
+          id="email"
+          name="email"
+          type="text"
+          ref={emailRef}
+          className={styles.login__input}
+        />
       </span>
       <span>
         <label htmlFor="password">Enter password</label>
-        <input id="password" name="password" type="text" ref={passwordRef} />
+        <input
+          id="password"
+          name="password"
+          type="text"
+          ref={passwordRef}
+          className={styles.login__input}
+        />
       </span>
-      <button type="submit" disabled={btnDisabled}>
+      <button
+        type="submit"
+        disabled={btnDisabled}
+        className={styles.login__btn}
+      >
         Submit
       </button>
       {error && <p className="error_text">Invalid email or password</p>}

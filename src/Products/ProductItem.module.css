@@ -47,3 +47,8 @@
   background: #2c4fb9;
   cursor: pointer;
 }
+.product__btn:disabled {
+  background: #1e367e;
+  color: #9a9a9a;
+  cursor: auto;
+}

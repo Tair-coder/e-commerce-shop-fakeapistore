@@ -1,0 +1,16 @@
+.login__input {
+  border-radius: 10px;
+  border: none;
+  padding-left: 10px;
+}
+.login__btn {
+  border-radius: 10px;
+  padding: 5px 10px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  color: #2c4fb9;
+}
+.login__btn:disabled {
+  background: #a3a2a2;
+}

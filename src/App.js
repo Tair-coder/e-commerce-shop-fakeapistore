@@ -1,22 +1,18 @@
-import { useState } from "react";
 import { Route } from "react-router-dom";
 import Main from "./AuthPages/Main";
 import Home from "./Products/Home";
-
+import { useSelector } from "react-redux";
 function App() {
-  const [user, setUser] = useState(null);
-  const setUserHandler = (value) => {
-    setUser(value);
-  };
-
-  const loginPage = <Main setUser={setUserHandler} />;
+  const user = useSelector((state) => state.fetch.uid);
   return (
     <div className="App">
       <Route path="/" exact>
-        {loginPage}
+        <Main />
       </Route>
-      <Route path="/login">{loginPage} </Route>
-      <Route path="/products">{user ? <Home /> : loginPage}</Route>
+      <Route path="/login">
+        <Main />
+      </Route>
+      <Route path="/products">{user ? <Home /> : <Main />}</Route>
     </div>
   );
 }
