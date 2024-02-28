@@ -1,4 +1,4 @@
-import React, { useEffect, useImperativeHandle, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import styles from "./Products.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,14 +19,14 @@ const fetchData = async (setLoader, user, filterData) => {
 };
 function Products() {
   const newData = useSelector((state) => state.fetch.data);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
   const user = useSelector((state) => state.fetch.uid);
   const dispatchFunction = useDispatch();
   useEffect(() => {
     const filterData = (productsData, cartData) => {
       if (cartData == null) {
-        setData(productsData);
+        // setData(productsData);
         dispatchFunction(fetchSlideAction.setData({ data: productsData }));
         return setLoader(true);
       }
@@ -43,14 +43,13 @@ function Products() {
           updatedData[i].disabled = true;
         }
       }
-      setData(updatedData);
+      // setData(updatedData);
       dispatchFunction(fetchSlideAction.setData({ data: updatedData }));
 
       setLoader(true);
     };
     fetchData(setLoader, user, filterData);
   }, []);
-  const addHandler = (id) => {};
   return (
     <ul className={styles.products__list}>
       {!loader ? (
